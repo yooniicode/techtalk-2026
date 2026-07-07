@@ -1,0 +1,49 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "amazon-bedrock/us.anthropic.claude-sonnet-4-6",
+  "small_model": "amazon-bedrock/us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "provider": {
+    "amazon-bedrock": {
+      "options": {
+        "region": "us-east-1"
+      }
+    }
+  },
+  "agent": {
+    "planner": {
+      "description": "고가 모델로 작업을 분석하고 단계별 실행 계획만 세운다 (코드 수정 없음)",
+      "mode": "primary",
+      "model": "amazon-bedrock/us.anthropic.claude-sonnet-4-6",
+      "temperature": 0.3,
+      "prompt": "너는 시니어 아키텍트다. 주어진 작업을 분석해 명확하고 실행 가능한 단계별 계획을 세운다. 코드를 직접 수정하지 말고, 무엇을·왜·어떤 순서로 해야 하는지 번호 매긴 계획으로만 답한다. 각 단계는 저가 모델(주니어 개발자)이 그대로 따라 실행할 수 있을 만큼 구체적이어야 한다. 관련 파일 경로, 주의점, 검증 방법을 포함하라.",
+      "permission": {
+        "edit": "deny",
+        "bash": "deny",
+        "write": "deny",
+        "read": "allow",
+        "grep": "allow",
+        "glob": "allow",
+        "list": "allow"
+      }
+    },
+    "executor": {
+      "description": "저가 모델로 주어진 계획을 그대로 실행한다 (파일 수정/명령 실행)",
+      "mode": "primary",
+      "model": "amazon-bedrock/us.anthropic.claude-haiku-4-5-20251001-v1:0",
+      "temperature": 0.0,
+      "prompt": "너는 성실한 실행자다. 주어진 계획의 각 단계를 순서대로 정확히 수행한다. 계획에 없는 임의 판단은 최소화하고, 계획을 벗어나야 할 경우에만 짧게 이유를 남긴다. 각 단계를 마치면 무엇을 했는지 간단히 보고하라.",
+      "permission": {
+        "edit": "allow",
+        "write": "allow",
+        "read": "allow",
+        "bash": {
+          "*": "allow",
+          "rm *": "ask",
+          "rm -rf *": "ask",
+          "git push*": "ask",
+          "git reset --hard*": "ask"
+        }
+      }
+    }
+  }
+}

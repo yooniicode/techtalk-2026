@@ -1,0 +1,23 @@
+# 비밀 값 — 절대 커밋 금지 (Discord 토큰, API 키, opencode 비밀번호)
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 에이전트 작업공간 (레포를 clone하는 곳 — 커밋 대상 아님)
+workspace/
+
+# Claude Code 로컬 설정
+.claude/
+
+# OS / 에디터
+.DS_Store
+Thumbs.db
+.idea/
+*.log
