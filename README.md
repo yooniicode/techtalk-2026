@@ -3,7 +3,7 @@
 AWS Cloud Club Tech Talk용 레포지토리
 
 
-[발표 자료]([https://www.figma.com/proto/OijXhRg3edAE8hEFrKmBmf/tech-talk?node-id=3-8600&viewport=371%2C304%2C0.18&t=NrK42GkdzI285Zaq-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A8388&page-id=3%3A629](https://www.figma.com/proto/OijXhRg3edAE8hEFrKmBmf/tech-talk?node-id=3-8388&viewport=371%2C304%2C0.18&t=NrK42GkdzI285Zaq-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A8388&page-id=3%3A629&show-proto-sidebar=1))
+[발표 자료](https://www.figma.com/proto/OijXhRg3edAE8hEFrKmBmf/tech-talk?node-id=3-8388&viewport=371%2C304%2C0.18&t=NrK42GkdzI285Zaq-1&scaling=contain&content-scaling=fixed&starting-point-node-id=3%3A8388&page-id=3%3A629&show-proto-sidebar=1)
 
 Discord에서 슬래시 커맨드로 코딩 에이전트를 부리는 봇이다. 백엔드는 opencode 서버,
 모델은 AWS Bedrock의 Claude(Sonnet 4.6 / Haiku 4.5). 코드 레포에서 이슈를 읽고
