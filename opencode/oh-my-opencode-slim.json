@@ -1,0 +1,38 @@
+{
+  "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
+  "preset": "bedrock",
+  "presets": {
+    "bedrock": {
+      "orchestrator": {
+        "model": "amazon-bedrock/us.anthropic.claude-sonnet-4-6",
+        "skills": ["*"],
+        "mcps": ["*", "!context7"]
+      },
+      "oracle": {
+        "model": "amazon-bedrock/us.anthropic.claude-sonnet-4-6",
+        "skills": ["simplify"],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "amazon-bedrock/us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "skills": [],
+        "mcps": ["websearch", "gh_grep"]
+      },
+      "explorer": {
+        "model": "amazon-bedrock/us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "skills": [],
+        "mcps": []
+      },
+      "designer": {
+        "model": "amazon-bedrock/us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "amazon-bedrock/us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        "skills": [],
+        "mcps": []
+      }
+    }
+  }
+}

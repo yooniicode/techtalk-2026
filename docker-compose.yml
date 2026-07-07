@@ -12,10 +12,11 @@ services:
       - GIT_AUTHOR_EMAIL=${GIT_EMAIL}
       - GIT_COMMITTER_NAME=${GIT_NAME}
       - GIT_COMMITTER_EMAIL=${GIT_EMAIL}
+      - OMO_INSTALL=1                     # 시작 시 oh-my-opencode-slim 설치/갱신
     volumes:
       - opencode-workspace:/workspace   # 에이전트가 레포를 clone하는 작업공간
       - "D:/obsidian:/vault"            # 옵시디언 볼트 (읽기+쓰기, git 레포라 되돌릴 수 있음)
-      - ./opencode/opencode.json:/root/.config/opencode/opencode.json:ro   # 기본 모델 = Claude
+      - opencode-config:/root/.config/opencode                          # opencode.json + oh-my-opencode skills/설정 영속화
       - opencode-data:/root/.local/share/opencode
     # 포트를 호스트에 노출하지 않음 — 봇만 내부 네트워크로 접근
     restart: unless-stopped
@@ -34,3 +35,4 @@ services:
 volumes:
   opencode-data:
   opencode-workspace:
+  opencode-config:

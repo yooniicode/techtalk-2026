@@ -486,6 +486,15 @@ async def ask(interaction: discord.Interaction, prompt: str):
                     title=thread_title(prompt))
 
 
+@tree.command(name="omo", description="oh-my-opencode 오케스트레이터로 멀티에이전트 작업을 수행합니다")
+@discord.app_commands.describe(task="맡길 작업 (탐색·설계·구현을 전문 에이전트가 자동 분담)")
+async def omo(interaction: discord.Interaction, task: str):
+    await interaction.response.defer(thinking=True)
+    await run_agent(interaction, AGENT_RULES + task,
+                    "🤖 **멀티에이전트 완료 (oh-my-opencode)**",
+                    agent="orchestrator", title=thread_title(f"🤖 {task}"))
+
+
 @tree.command(name="steer", description="진행 중이던 작업의 방향을 수정합니다 (같은 스레드 세션 이어받음)")
 @discord.app_commands.describe(correction="방향 수정 지시 (예: DTO 말고 record로 다시 해줘)")
 async def steer(interaction: discord.Interaction, correction: str):

@@ -1,6 +1,6 @@
 FROM node:22-slim
 
-RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates curl gnupg \
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates curl gnupg unzip \
     && mkdir -p /etc/apt/keyrings \
     && curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
        | dd of=/etc/apt/keyrings/githubcli-archive-keyring.gpg \
@@ -12,7 +12,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends git ca-certific
 
 RUN npm install -g opencode-ai
 
+# oh-my-opencode-slim 플러그인이 요구하는 bun 런타임
+RUN curl -fsSL https://bun.sh/install | BUN_INSTALL=/usr/local bash
+
 WORKDIR /workspace
+
+# 기본 opencode 설정을 이미지에 심어두고, entrypoint가 config 볼륨으로 복사한다
+COPY opencode.json /opt/opencode-default.json
+COPY oh-my-opencode-slim.json /opt/oh-my-opencode-slim.json
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh

@@ -45,5 +45,8 @@
         }
       }
     }
-  }
+  },
+  "plugin": [
+    "oh-my-opencode-slim"
+  ]
 }
