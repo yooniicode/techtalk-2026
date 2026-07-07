@@ -595,6 +595,29 @@ async def issue(interaction: discord.Interaction, number: int, instruction: str 
                     title=thread_title(issue_title))
 
 
+@tree.command(name="newissue", description="레포를 살펴보고 잘 정리된 GitHub 이슈를 생성합니다")
+@discord.app_commands.describe(summary="이슈로 만들 내용 (한 줄이면 충분)")
+async def newissue(interaction: discord.Interaction, summary: str):
+    await interaction.response.defer(thinking=True)
+    prompt = AGENT_RULES + (
+        "In /workspace/repo, create a well-structured GitHub issue from the user's short "
+        "description below.\n"
+        "First investigate the repo to make the issue concrete: search related code with "
+        "grep/read, and cite relevant file paths. Then write the issue in Korean with:\n"
+        "- 제목: 간결하고 명확하게 (필요하면 [Feat]/[Bug]/[Refactor] 접두어)\n"
+        "- 배경/문제: 무엇이 왜 필요한지\n"
+        "- 관련 코드: 살펴본 파일 경로와 위치\n"
+        "- 제안/재현 단계: 기능이면 구현 방향, 버그면 재현 방법\n"
+        "- 완료 조건(체크리스트)\n"
+        "Create it with `gh issue create` (적절한 --label 이 있으면 붙여라). "
+        "Then report the created issue URL and its title.\n\n"
+        f"사용자 설명: {summary}"
+    )
+    await run_agent(interaction, prompt, "🐣 이슈 생성 완료",
+                    title=thread_title(f"🐣 {summary}"),
+                    confirm="레포를 살펴보고 새 GitHub 이슈를 생성합니다. 진행할까요?")
+
+
 @tree.command(name="doc", description="이번 브랜치 작업을 git 기록으로 문서화합니다")
 @discord.app_commands.describe(title="문서 제목 (선택)")
 async def doc(interaction: discord.Interaction, title: str = ""):
